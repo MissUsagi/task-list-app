@@ -1,7 +1,7 @@
 <template>
   <base-container>
-    <base-header></base-header>
-    <add-task @add-task="addTask"></add-task>
+    <base-header @toggle-form="toggleAddTask"></base-header>
+    <add-task @add-task="addTask" v-show="showAddTask"></add-task>
     <ul>
       <list-item
         v-for="task in myTasks"
@@ -22,10 +22,9 @@ import ListItem from "../tasklist/ListItem.vue";
 import AddTask from "../tasklist/AddTask.vue";
 export default {
   components: { ListItem, AddTask },
-  props: ["index", "category"],
-
   data() {
     return {
+      showAddTask: false,
       myTasks: [
         {
           id: 1,
@@ -62,8 +61,12 @@ export default {
   },
   methods: {
     addTask(task) {
-      this.myTasks = [...this.myTasks, task];
+      this.myTasks = [task, ...this.myTasks];
       console.log(this.myTasks);
+    },
+    toggleAddTask() {
+      console.log(this.showAddTask);
+      this.showAddTask = !this.showAddTask;
     },
   },
 };

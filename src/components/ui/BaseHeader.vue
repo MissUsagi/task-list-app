@@ -1,7 +1,12 @@
 <template>
   <div>
     <h1>Dzisiaj jest {{ getDate() }}</h1>
-    <button>Dodaj</button>
+    <base-button
+      description="dodaj"
+      type="button"
+      @click="toggleAddTask"
+    ></base-button>
+    <!-- type korzysta z prop falltrough, nie musi być dodanu jako prop w child -->
   </div>
 </template>
 
@@ -9,14 +14,18 @@
 export default {
   data() {
     return {
-      todayIs: new Date(),
+      todayIs: "",
+      toggle: false,
     };
   },
   methods: {
     getDate() {
-      const dateString =
-        this.todayIs.getDate() + "/" + (this.todayIs.getMonth() + 1);
-      return (this.todayIs = dateString);
+      const dateString = new Date();
+      const todayIs = dateString.getDate() + "/" + (dateString.getMonth() + 1);
+      return (this.todayIs = todayIs);
+    },
+    toggleAddTask() {
+      this.$emit("toggle-form");
     },
   },
 };
@@ -24,6 +33,7 @@ export default {
 
 <style scoped>
 div {
+  padding: 2rem;
   height: 25%;
   border-bottom: 3px solid #421367;
   display: flex;
@@ -32,7 +42,6 @@ div {
   justify-content: space-between;
 }
 h1 {
-  padding: 2rem;
   font-family: "Catamaran", sans-serif;
   font-size: 3rem;
   color: var(--secondary-color);

@@ -40,16 +40,20 @@
       <label for="time-start">Czas</label>
       <input v-model="myTask.time" type="time" id="time-start" />
     </div>
-    <button type="submit">Dodaj Wydarzenie</button>
+    <div>
+      <button type="submit">Dodaj Wydarzenie</button>
+    </div>
   </form>
 </template>
 
 <script>
 export default {
+  emits: ["add-task"],
   data() {
     return {
+      toggle: true,
       myTask: {
-        category: "Rozrywka",
+        category: "",
         title: "",
         description: "",
         localization: "",
@@ -60,7 +64,7 @@ export default {
 
   methods: {
     submitForm() {
-      // walidacja i clear form
+      // potrzebna walidacja
       const newTask = {
         id: Math.floor(Math.random() * 100000),
         category: this.myTask.category,
@@ -73,11 +77,14 @@ export default {
 
       this.$emit("add-task", newTask);
 
-      this.category = "";
-      this.title = "";
-      this.description = "";
-      this.localization = "";
-      this.time = "";
+      this.clearForm();
+    },
+    clearForm() {
+      this.myTask.category = "";
+      this.myTask.title = "";
+      this.myTask.description = "";
+      this.myTask.localization = "";
+      this.myTask.time = "";
     },
   },
 };
@@ -94,12 +101,14 @@ textarea,
 select {
   padding: 5px 10px;
   margin-top: 5px;
+  border-radius: 5px;
 }
 textarea {
   resize: vertical;
 }
 
 button {
+  margin-top: 15px;
   padding: 15px 20px;
   width: 100%;
   color: white;
