@@ -73,8 +73,7 @@ export default {
         localization: this.myTask.localization,
         time: this.myTask.time,
       };
-      console.log(newTask);
-
+      console.log(newTask)
       this.$emit("add-task", newTask);
 
       this.clearForm();
