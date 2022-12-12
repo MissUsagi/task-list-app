@@ -18,12 +18,16 @@ import TaskList from '@/components/pages/TaskList.vue'
 describe('BaseHeader h1 test', () => {
   const wrapper = shallowMount(BaseHeader);
   const data = new Date();
-  const dataString = "Dzisiaj jest " + data.getDate() + '/' + (data.getMonth() + 1);
-  it('dzisiaj jest 12/12', () => {
+  const fullDate = data.getDate() + '/' + (data.getMonth() + 1) + "/" + data.getFullYear();
+
+
+  //false on purpose
+  it('czy widoczny jest stary nagłówek', () => {
     expect(wrapper.find("h1").text()).toBe("Dzisiaj jest 12/12");
   });
-  it('wyswietla dzisiejsza date', () => {
-    expect(wrapper.find("h1").text()).toBe(dataString)
+
+  it('czy zawiera dzisiejszą datę', () => {
+    expect(wrapper.find("h1").text()).toContain(fullDate);
   });
 
 });

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>Dzisiaj jest {{ getDate() }}</h1>
+    <h1> {{ getDate() }}</h1>
     <base-button
-      description="dodaj"
+     :description=buttonText
       type="button"
       @click="toggleAddTask"
     ></base-button>
@@ -15,17 +15,20 @@ export default {
   data() {
     return {
       todayIs: "",
-      toggle: false,
+      dniTygodnia: ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
+      buttonText: "Dodaj"
     };
   },
   methods: {
     getDate() {
       const dateString = new Date();
-      const todayIs = dateString.getDate() + "/" + (dateString.getMonth() + 1);
-      return (this.todayIs = todayIs);
+      const dzienTygodnia = this.dniTygodnia[dateString.getDay()];
+      const todayIs = dzienTygodnia + " " +dateString.getDate() + "/" + (dateString.getMonth() + 1) + "/" + dateString.getFullYear();
+     return this.todayIs = todayIs;
     },
     toggleAddTask() {
       this.$emit("toggle-form");
+      (this.buttonText === "Dodaj") ? this.buttonText = "Zwiń" : this.buttonText = "Dodaj";
     },
   },
 };
