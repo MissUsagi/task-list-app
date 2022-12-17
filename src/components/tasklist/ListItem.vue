@@ -32,6 +32,9 @@ export default {
     deleteTask()
     {
       this.$emit('delete-task', this.taskId);
+    },
+    editTask(){
+      
     }
   }
 };
