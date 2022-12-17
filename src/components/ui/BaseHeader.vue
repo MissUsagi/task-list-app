@@ -15,16 +15,16 @@ export default {
   data() {
     return {
       todayIs: "",
-      dniTygodnia: ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
+      dayOfTheWeek: ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
       buttonText: "Dodaj"
     };
   },
   methods: {
     getDate() {
       const dateString = new Date();
-      const dzienTygodnia = this.dniTygodnia[dateString.getDay()];
-      const todayIs = dzienTygodnia + " " +dateString.getDate() + "/" + (dateString.getMonth() + 1) + "/" + dateString.getFullYear();
-     return this.todayIs = todayIs;
+      const dotWeek = this.dayOfTheWeek[dateString.getDay()];
+      const todayIs = dotWeek + " " +dateString.getDate() + "/" + (dateString.getMonth() + 1) + "/" + dateString.getFullYear();
+      return this.todayIs = todayIs;
     },
     toggleAddTask() {
       this.$emit("toggle-form");

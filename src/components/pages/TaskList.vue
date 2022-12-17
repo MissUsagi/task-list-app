@@ -6,12 +6,13 @@
       <list-item
         v-for="task in myTasks"
         :key="task.id"
-        :index="task.id"
+        :id="task.id"
         :category="task.category"
         :title="task.title"
         :description="task.description"
         :location="task.location"
         :time="task.time"
+        @delete-task="deleteTask"
       ></list-item>
     </ul>
   </base-container>
@@ -68,6 +69,13 @@ export default {
       console.log(this.showAddTask);
       this.showAddTask = !this.showAddTask;
     },
+    deleteTask(id){
+      if(confirm("Czy chcesz usunąć wydarzenie?")){
+        this.myTasks = this.myTasks.filter((task)=>{
+        return task.id !== id;
+      })
+      }
+    }
   },
 };
 </script>

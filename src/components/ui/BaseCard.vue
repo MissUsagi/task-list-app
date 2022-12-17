@@ -10,8 +10,10 @@ export default {
 
 <style scoped>
 .card {
+  position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   border-radius: 10px;
   padding: 10px 20px;
   margin: 15px 5px 0 5px;
